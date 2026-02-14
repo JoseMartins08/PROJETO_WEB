@@ -3,10 +3,14 @@ body {
     background-color: black;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url(Imagens/background.jpg);
+    background-position: top left;
+    background-size: cover;
 }
 
 .cabecalho {
-    height: 95vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,10 +18,10 @@ body {
 }
 
 .titulo {
-    font-size: 3rem;
+    font-size: 60px;
     margin-bottom: 10px;
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(30px);
     animation: fadeDown 1s ease-out forwards;
     font-family: "Share Tech", sans-serif;
 }
@@ -41,6 +45,9 @@ body {
 
 .texto-sobre {
     flex: 1;
+    background-color: rgba(26, 25, 25, 0.7);
+    padding: 30px 30px;
+    border-radius: 8px;
 }
 
 .texto-sobre h2 {
@@ -60,8 +67,9 @@ body {
 }
 
 .imagem-sobre img {
-    width: 250px;
-    border-radius: 10px;
+    width: 300px;
+    border-radius: 7px;
+    border: 3px solid rgb(94, 69, 241);
 }
 
 .navegacao {
