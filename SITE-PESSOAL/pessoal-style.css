@@ -74,3 +74,40 @@ body{
     border: 3px solid rgb(170, 170, 170);
     box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
 }
+
+.botao {
+    display: inline-block;
+    margin: 10px 30px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.botao::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    width: 60%; 
+    height: 2px;
+    background-color: currentColor;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.botao:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+.botao:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
