@@ -1,8 +1,7 @@
 body {
     margin: 0;
-    background-color: black;
-    color: white;
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
 
     background-image: url(Imagens/background.jpg);
     background-position: top left;
@@ -33,6 +32,13 @@ body {
     transform: translateY(-20px);
     animation: fadeDown 1s ease-out forwards;
     animation-delay: 0.3s;
+}
+
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .sobre {
@@ -69,7 +75,7 @@ body {
 .imagem-sobre img {
     width: 300px;
     border-radius: 7px;
-    border: 3px solid rgb(94, 69, 241);
+    border: 3px solid rgb(141, 141, 141);
 }
 
 .navegacao {
@@ -119,11 +125,4 @@ body {
 
 .botao:hover::after {
     transform: translateX(-50%) scaleX(1);
-}
-
-@keyframes fadeDown {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
