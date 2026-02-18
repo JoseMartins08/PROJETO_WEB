@@ -8,8 +8,8 @@ body{
     background-size: cover;
 }
 
-.cabecalho {
-    height: 100vh;
+.comeco {
+    height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,10 +17,60 @@ body{
 }
 
 .titulo {
-    font-size: 60px;
+    font-size: 70px;
     margin-bottom: 10px;
-    opacity: 0;
     transform: translateY(20px);
     animation: fadeDown 1s ease-out forwards;
     font-family: "Share Tech", sans-serif;
+}
+
+.sobre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10%;
+    gap: 40px;
+}
+
+.texto-sobre {
+    flex: 1;
+    background-color: rgba(26, 25, 25, 0.7);
+    padding: 30px 30px;
+    border-radius: 8px;
+}
+
+.texto-sobre h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.texto-sobre p {
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.imagem-sobre {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.imagem-sobre img {
+    width: 300px;
+    border-radius: 7px;
+    border: 3px solid rgb(170, 170, 170);
+    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
+}
+
+.video-sobre {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.video-sobre video {
+    width: 600px;
+    border-radius: 7px;
+    border: 3px solid rgb(170, 170, 170);
+    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
 }
