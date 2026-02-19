@@ -34,69 +34,13 @@ header {
     text-align: center;
     text-decoration: underline;
     display: inline-flex;
-    margin-left: 35%;
-}
-
-.sobre {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 100px 10%;
-    gap: 40px;
-}
-
-.texto-sobre {
-    flex: 1;
-    background-color: rgba(26, 25, 25, 0.7);
-    padding: 30px 30px;
-    border-radius: 8px;
-}
-
-.texto-sobre h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.texto-sobre p {
-    line-height: 1.6;
-    color: #ccc;
-}
-
-.imagem-sobre {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.imagem-sobre img {
-    width: 300px;
-    border-radius: 7px;
-    border: 3px solid rgb(170, 170, 170);
-    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
-}
-
-.video-sobre {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.video-sobre video {
-    width: 600px;
-    border-radius: 7px;
-    border: 3px solid rgb(170, 170, 170);
-    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
-}
-
-.navegacao {
-    text-align: center;
-    padding: 80px 0;
+    margin-left: 27%;
 }
 
 .botao {
     display: inline-block;
-    margin: 10px 30px;
-    padding: 10px 20px;
+    margin: 0 50px;
+    padding: 20px 45px;
     border: 1px solid white;
     color: white;
     text-decoration: none;
@@ -111,8 +55,8 @@ header {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 10px;
-    width: 60%; 
+    bottom: 15px;
+    width: 50%; 
     height: 2px;
     background-color: currentColor;
     transform: translateX(-50%) scaleX(0);
@@ -127,5 +71,5 @@ header {
 }
 
 .botao:hover::after {
-    transform: translateX(-50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1.4);
 }
