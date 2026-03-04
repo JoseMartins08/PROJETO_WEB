@@ -20,14 +20,6 @@ header {
     align-items: center;
 }
 
-.titulo {
-    font-size: 70px;
-    margin-bottom: 10px;
-    transform: translateY(20px);
-    animation: fadeDown 1s ease-out forwards;
-    font-family: "Share Tech", sans-serif;
-}
-
 .titulo-header {
     font-family: "Share Tech", sans-serif;
     font-size: 30px;
@@ -35,6 +27,12 @@ header {
     text-decoration: underline;
     display: inline-flex;
     margin-left: 35%;
+}
+
+.titulo {
+    font-size: 70px;
+    margin-bottom: -60px;
+    font-family: "Share Tech", sans-serif;
 }
 
 .sobre {
@@ -99,33 +97,8 @@ header {
     padding: 10px 20px;
     border: 1px solid white;
     color: white;
-    text-decoration: none;
     transition: 0.3s;
     border-radius: 5px;
     font-weight: bold;
-    transition: transform 0.3s ease;
     cursor: pointer;
-}
-
-.botao::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    width: 60%; 
-    height: 2px;
-    background-color: currentColor;
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease;
-}
-
-.botao:hover {
-    background-color: white;
-    color: black;
-    transform: scale(1.1);
-}
-
-.botao:hover::after {
-    transform: translateX(-50%) scaleX(1);
 }

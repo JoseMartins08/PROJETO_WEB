@@ -22,9 +22,7 @@ header {
 
 .titulo {
     font-size: 70px;
-    margin-bottom: 10px;
-    transform: translateY(20px);
-    animation: fadeDown 1s ease-out forwards;
+    margin-bottom: -60px;
     font-family: "Share Tech", sans-serif;
 }
 
@@ -43,33 +41,8 @@ header {
     padding: 20px 45px;
     border: 1px solid white;
     color: white;
-    text-decoration: none;
     transition: 0.3s;
     border-radius: 5px;
     font-weight: bold;
-    transition: transform 0.3s ease;
     cursor: pointer;
-}
-
-.botao::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 15px;
-    width: 50%; 
-    height: 2px;
-    background-color: currentColor;
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease;
-}
-
-.botao:hover {
-    background-color: white;
-    color: black;
-    transform: scale(1.1);
-}
-
-.botao:hover::after {
-    transform: translateX(-50%) scaleX(1.4);
 }

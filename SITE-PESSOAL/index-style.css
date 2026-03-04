@@ -2,7 +2,6 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-
     background-image: url(Imagens/background.jpg);
     background-position: top left;
     background-size: cover;
@@ -19,26 +18,12 @@ body {
 .titulo {
     font-size: 60px;
     margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeDown 1s ease-out forwards;
     font-family: "Share Tech", sans-serif;
 }
 
 .subtitulo {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #aaa;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeDown 1s ease-out forwards;
-    animation-delay: 0.3s;
-}
-
-@keyframes fadeDown {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .sobre {
@@ -96,33 +81,8 @@ body {
     padding: 20px 45px;
     border: 1px solid white;
     color: white;
-    text-decoration: none;
     transition: 0.3s;
     border-radius: 5px;
     font-weight: bold;
-    transition: transform 0.3s ease;
     cursor: pointer;
-}
-
-.botao::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 18px;
-    width: 50%; 
-    height: 2px;
-    background-color: currentColor;
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease;
-}
-
-.botao:hover {
-    background-color: white;
-    color: black;
-    transform: scale(1.1);
-}
-
-.botao:hover::after {
-    transform: translateX(-50%) scaleX(1);
 }
