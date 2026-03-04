@@ -2,7 +2,6 @@ body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-
     background-image: url(Imagens/background.jpg);
     background-position: top left;
     background-size: cover;
@@ -33,6 +32,44 @@ header {
     text-decoration: underline;
     display: inline-flex;
     margin-left: 27%;
+}
+
+.bloco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10%;
+    gap: 40px;
+}
+
+.texto-bloco {
+    flex: 1;
+    background-color: rgba(26, 25, 25, 0.7);
+    padding: 30px 30px;
+    border-radius: 8px;
+}
+
+.texto-bloco h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.texto-bloco p {
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.imagem-bloco {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.imagem-bloco img {
+    width: 300px;
+    border-radius: 7px;
+    border: 3px solid rgb(170, 170, 170);
+    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
 }
 
 .botao {
