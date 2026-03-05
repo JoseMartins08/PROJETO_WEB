@@ -94,6 +94,19 @@ header {
     box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
 }
 
+.print{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.print img {
+    width: 600px;
+    border-radius: 7px;
+    border: 3px solid rgb(170, 170, 170);
+    box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
+}
+
 .botao {
     display: inline-block;
     margin: 0 50px;
@@ -104,4 +117,17 @@ header {
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.rodape {
+    background-color: rgba(57, 57, 57, 0.8);
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 80px;
+}
+
+.rodape-nome {
+    font-family: "Share Tech", sans-serif;
+    font-size: 18px;
+    color: #ffffff;
 }

@@ -86,3 +86,16 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
+.rodape {
+    background-color: rgba(57, 57, 57, 0.8);
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 80px;
+}
+
+.rodape-nome {
+    font-family: "Share Tech", sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+}
