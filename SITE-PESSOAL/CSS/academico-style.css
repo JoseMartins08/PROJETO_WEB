@@ -2,7 +2,7 @@ body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    background-image: url(Imagens/background.jpg);
+    background-image: url(../Imagens/background.jpg);
     background-position: top left;
     background-size: cover;
 }
@@ -11,7 +11,24 @@ header {
     background-color: rgba(59, 59, 59, 0.541);
 }
 
-.comeco {
+.text-comeco {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto-inicial{
+    background-color: rgba(26, 25, 25, 0.847);
+    text-align: center;
+    padding: 20px 20px;
+    border-radius: 8px;
+    font-size: 25px;
+    width: 80%;
+}
+
+.comeco{
     height: 20vh;
     display: flex;
     flex-direction: column;
@@ -23,6 +40,11 @@ header {
     font-size: 70px;
     margin-bottom: -60px;
     font-family: "Share Tech", sans-serif;
+}
+
+.subtitulo {
+    font-size: 1.3rem;
+    color: #d0d0d0;
 }
 
 .titulo-header {
@@ -66,7 +88,7 @@ header {
 }
 
 .imagem-bloco img {
-    width: 300px;
+    width: 320px;
     border-radius: 7px;
     border: 3px solid rgb(170, 170, 170);
     box-shadow: 5px 5px 10px 5px rgba(255, 254, 254, 0.3);
