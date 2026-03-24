@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div id="container">
+      <h1>Gerenciador de Tarefas</h1>
+
+      <div id="contador">Total de tarefas: <span id="numTarefas">0</span></div>
+
+      <div id="formulario">
+        <input type="text" id="inputTarefa" placeholder="Digite uma tarefa...">
+        <input type="date" id="inputData">
+        <button onclick="adicionarTarefa()">Adicionar</button>
+      </div>
+
+      <ul id="listaTarefas"></ul>
+    </div>
+
+    <script>
+      // Array que guarda todas as tarefas
+      var tarefas = [];
+
+      // Função para adicionar tarefa
+      function adicionarTarefa() {
+        var texto = document.getElementById('inputTarefa').value;
+        var data = document.getElementById('inputData').value;
+
+        // Validação: não permite tarefa em branco ou menos de 3 caracteres
+        if (texto.trim() === '') {
+          alert('Por favor, digite uma tarefa!');
+          return;
+        }
+
+        if (texto.trim().length < 3) {
+          alert('A tarefa deve ter no mínimo 3 caracteres!');
+          return;
+        }
+
+        // Cria objeto da tarefa
+        var tarefa = {
+          id: Date.now(),
+          texto: texto,
+          data: data,
+          concluida: false
+        };
+
+        // Adiciona no array
+        tarefas.push(tarefa);
+
+        // Limpa os campos
+        document.getElementById('inputTarefa').value = '';
+        document.getElementById('inputData').value = '';
+
+        // Atualiza a lista na tela
+        renderizarLista();
+      }
+
+      // Função que desenha a lista na tela
+      function renderizarLista() {
+        var ul = document.getElementById('listaTarefas');
+        ul.innerHTML = ''; // limpa a lista
+
+        for (var i = 0; i < tarefas.length; i++) {
+          var t = tarefas[i];
+
+          var li = document.createElement('li');
+
+          if (t.concluida) {
+            li.classList.add('concluida');
+          }
+
+          // Monta o conteúdo do item
+          var infoData = t.data ? ' — ' + t.data : '';
+
+          li.innerHTML =
+            '<span class="textoTarefa">' + t.texto + infoData + '</span>' +
+            '<div class="botoes">' +
+            '  <button onclick="concluirTarefa(' + t.id + ')">Concluir</button>' +
+            '  <button onclick="removerTarefa(' + t.id + ')">Remover</button>' +
+            '</div>';
+
+          ul.appendChild(li);
+        }
+
+        // Atualiza o contador
+        document.getElementById('numTarefas').textContent = tarefas.length;
+      }
+
+      // Marca ou desmarca uma tarefa como concluída
+      function concluirTarefa(id) {
+        for (var i = 0; i < tarefas.length; i++) {
+          if (tarefas[i].id === id) {
+            tarefas[i].concluida = !tarefas[i].concluida;
+            break;
+          }
+        }
+        renderizarLista();
+      }
+
+      // Remove uma tarefa da lista
+      function removerTarefa(id) {
+        var novaLista = [];
+        for (var i = 0; i < tarefas.length; i++) {
+          if (tarefas[i].id !== id) {
+            novaLista.push(tarefas[i]);
+          }
+        }
+        tarefas = novaLista;
+        renderizarLista();
+      }
+
+      // Permite adicionar tarefa pressionando Enter
+      document.getElementById('inputTarefa').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          adicionarTarefa();
+        }
+      });
+    </script>
+
+  </body>
+</html>
