@@ -23,15 +23,12 @@
     </div>
 
     <script>
-      // Array que guarda todas as tarefas
       var tarefas = [];
 
-      // Função para adicionar tarefa
       function adicionarTarefa() {
         var texto = document.getElementById('inputTarefa').value;
         var data = document.getElementById('inputData').value;
 
-        // Validação: não permite tarefa em branco ou menos de 3 caracteres
         if (texto.trim() === '') {
           alert('Por favor, digite uma tarefa!');
           return;
@@ -42,29 +39,23 @@
           return;
         }
 
-        // Cria objeto da tarefa
         var tarefa = {
           id: Date.now(),
           texto: texto,
           data: data,
           concluida: false
         };
-
-        // Adiciona no array
         tarefas.push(tarefa);
 
-        // Limpa os campos
         document.getElementById('inputTarefa').value = '';
         document.getElementById('inputData').value = '';
 
-        // Atualiza a lista na tela
         renderizarLista();
       }
 
-      // Função que desenha a lista na tela
       function renderizarLista() {
         var ul = document.getElementById('listaTarefas');
-        ul.innerHTML = ''; // limpa a lista
+        ul.innerHTML = '';
 
         for (var i = 0; i < tarefas.length; i++) {
           var t = tarefas[i];
@@ -75,7 +66,6 @@
             li.classList.add('concluida');
           }
 
-          // Monta o conteúdo do item
           var infoData = t.data ? ' — ' + t.data : '';
 
           li.innerHTML =
@@ -87,12 +77,9 @@
 
           ul.appendChild(li);
         }
-
-        // Atualiza o contador
         document.getElementById('numTarefas').textContent = tarefas.length;
       }
 
-      // Marca ou desmarca uma tarefa como concluída
       function concluirTarefa(id) {
         for (var i = 0; i < tarefas.length; i++) {
           if (tarefas[i].id === id) {
@@ -103,7 +90,6 @@
         renderizarLista();
       }
 
-      // Remove uma tarefa da lista
       function removerTarefa(id) {
         var novaLista = [];
         for (var i = 0; i < tarefas.length; i++) {
@@ -113,14 +99,7 @@
         }
         tarefas = novaLista;
         renderizarLista();
-      }
-
-      // Permite adicionar tarefa pressionando Enter
-      document.getElementById('inputTarefa').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          adicionarTarefa();
-        }
-      });
+      };
     </script>
 
   </body>
