@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+header{
+    background-color: rgb(228, 160, 23);
+    justify-content: left;
+    font-size: 40px;
+    color: white;
+    height: 10vh;
+    text-align: left;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
