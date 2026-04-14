@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Loja</title>
-        <link rel="stylesheet" href="CSS/index-style.css">
-    </head>
-    <body>
-        <header>
-            LOJA
-        </header>
-        
-    </body>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+    <link rel="stylesheet" href="CSS/index-style.css">
+</head>
+<body>
+    <header>
+        <h1>Jotech</h1>
+        <p>Hardware de PC</p>
+    </header>
+
+    <div id="conteudo">
+
+        <div id="area-produtos">
+            <h2>Produtos</h2>
+            <div id="lista-produtos">
+
+            </div>
+        </div>
+
+        <div id="area-carrinho">
+            <h2>🛒 Carrinho</h2>
+            <div id="lista-carrinho">
+                <p id="msg-vazio">Carrinho vazio.</p>
+            </div>
+            <hr>
+            <p id="total-compra"><strong>Total: R$ 0,00</strong></p>
+            <button id="btn-limpar">Limpar Carrinho</button>
+        </div>
+
+    </div>
+
+    <script src="JAVASCRIPT/index-script.js"></script>
+</body>
 </html>
