@@ -23,7 +23,7 @@ function listarProdutos(listaProdutos = produtos) {
     const lista = document.querySelector("#lista-produtos");
     lista.innerHTML = "";
 
-    // Para cada produto dentro     a array, o site monta um formato para ele aparecer
+    // Para cada produto dentro da array, o site monta um formato para ele aparecer
     listaProdutos.forEach(function(produto) {
         const card = document.createElement("div");
         card.className = "card-produto";
