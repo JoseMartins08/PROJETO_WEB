@@ -1,5 +1,6 @@
+// ARRAY COM TODOS OS PRODUTOS À VENDA NA LOJA
 const produtos = [
-    {nome: "RX6700 XT", preco: 1500.00, imagem: "IMAGENS/gpu1.jpg"},
+    {nome: "ASRock Radeon RX6700 XT", preco: 1500.00, imagem: "IMAGENS/gpu1.jpg"},
     {nome: "AMD Ryzen 5 5500", preco: 580.89, imagem: "IMAGENS/ryzen5.jpg"},
     {nome: "SSD Husky 512GB NVMe", preco: 699.00 , imagem: "IMAGENS/ssd-nvme.jpg"},
     {nome: "ASUS VivoBook Go 15", preco: 2899.80, imagem: "IMAGENS/asusvivobook.jpg"},
@@ -11,13 +12,19 @@ const produtos = [
     {nome: "Fonte Corsair 750W", preco: 519.00, imagem:"IMAGENS/fontecorsair.jpg"},
     {nome: "SSD Kingston 960GB 2.5' SATA", preco: 899.99, imagem:"IMAGENS/ssdsata.jpg"},
     {nome: "Air Cooler Rise Mode Storm 8", preco: 199.99, imagem:"IMAGENS/aircooler.jpg"},
+    {nome: "HD Surveillance WD Purple, 2TB", preco: 699.99, imagem:"IMAGENS/hd.jpg"},
+    {nome: "Samsung Galaxy S25 Ultra 5G", preco: 6159.90, imagem:"IMAGENS/samsung.jpg"},
+    {nome: "Iphone 16 Pro Max 256GB", preco: 12499.00, imagem:"IMAGENS/iphone.jpg"},
+    {nome: "MacBook Pro Chip M5 Max, 2TB SSD", preco: 36999.00, imagem:"IMAGENS/macbook.jpg"}
 ];
 
-function listarProdutos() {
+// Função responsável por listar os produtos
+function listarProdutos(listaProdutos = produtos) {
     const lista = document.querySelector("#lista-produtos");
     lista.innerHTML = "";
 
-    produtos.forEach(function(produto) {
+    // Para cada produto dentro     a array, o site monta um formato para ele aparecer
+    listaProdutos.forEach(function(produto) {
         const card = document.createElement("div");
         card.className = "card-produto";
 
@@ -40,10 +47,8 @@ function listarProdutos() {
     });
 };
 
-document.addEventListener("DOMContentLoaded", function() {
-    listarProdutos();
-});
 
+// Função que adiciona o produto ao carrinho
 function addAoCarrinho(produto) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
@@ -54,6 +59,7 @@ function addAoCarrinho(produto) {
     mostrarCarrinho();
 }
 
+// Função que mostra o carrinho na tela
 function mostrarCarrinho() {
     const lista = document.querySelector("#lista-carrinho");
     const totalTexto = document.querySelector("#total-compra");
@@ -62,7 +68,8 @@ function mostrarCarrinho() {
 
     lista.innerHTML = "";
 
-    if (carrinho.lenght === 0) {
+    // O codigo verifica se o carrinho está vazio
+    if (carrinho.length === 0) {
         lista.innerHTML = "<p>Carrinho vazio.</p>";
         totalTexto.innerHTML = "<strong>Total: R$ 0,00</strong>";
 
@@ -76,7 +83,7 @@ function mostrarCarrinho() {
 
         item.innerHTML =
             `${produto.nome} - R$ ${produto.preco.toFixed(2)}
-            <button class="btn-remover" onclick="removerItem(${index})">-</button`;
+            <button class="btn-remover" onclick="removerItem(${index})">-</button>`;
 
         lista.appendChild(item);
 
@@ -86,6 +93,7 @@ function mostrarCarrinho() {
     totalTexto.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
 }
 
+// Função que remove itens do carrinho
 function removerItem(index) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
@@ -103,7 +111,41 @@ document.querySelector("#btn-limpar").addEventListener("click", function() {
 })
 
 document.addEventListener("DOMContentLoaded", function() {
-    listarProdutos();
-
+    listarProdutos(); // Os produtos são automaticamente listados ao carregar o site
     mostrarCarrinho();
-})
+
+    // Constante para filtragem de produtos por preço
+    const selectPreco = document.querySelector("#select-preco");
+
+    selectPreco.addEventListener("change", function(){
+        const valor = selectPreco.value;
+
+        let filtrados;
+
+        if (valor === "todos") {
+            filtrados = produtos;
+        }
+        else {
+            filtrados = produtos.filter(function(produto){
+                return produto.preco <= Number(valor);
+            });
+        }
+
+        listarProdutos(filtrados);
+    });
+});
+
+// Constante para fazer a rolagem ficar suave e fluida
+const lenis = new Lenis({
+  duration: 1.2,
+  smooth: true
+});
+
+// Função que faz a constante rodar em loop
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+// Dar start na função
+requestAnimationFrame(raf);
