@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f4f8;
+    color: #2d3748;
+    padding: 30px 20px;
+}
+
+/* Container central */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+/* Cabeçalho */
+h1 {
+    font-size: 24px;
+    color: #1a365d;
+    text-align: center;
+    margin-bottom: 6px;
+    border-bottom: 3px solid #2b6cb0;
+    padding-bottom: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-size: 18px;
+    color: #2b6cb0;
+    margin-top: 30px;
+    margin-bottom: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+    font-size: 15px;
+    color: #2d3748;
+    margin-bottom: 10px;
+    background-color: #ebf4ff;
+    padding: 8px 12px;
+    border-left: 4px solid #2b6cb0;
+    border-radius: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p.subtitulo {
+    text-align: center;
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* Formulários */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #4a5568;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #2d3748;
+    background-color: #f7fafc;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #2b6cb0;
+    background-color: #fff;
+}
+
+/* Grupo de inputs lado a lado */
+.grupo-notas {
+    display: flex;
+    gap: 16px;
+}
+
+.grupo-notas > div {
+    flex: 1;
+}
+
+/* Bloco de cada aluno */
+.bloco-aluno {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Botões */
+button,
+input[type="submit"] {
+    background-color: #2b6cb0;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 24px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #1a4f8a;
+}
+
+.btn-secundario {
+    background-color: #718096;
+    margin-right: 10px;
+}
+
+.btn-secundario:hover {
+    background-color: #4a5568;
+}
+
+/* Divisor */
+hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 28px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+thead tr {
+    background-color: #2b6cb0;
+    color: #ffffff;
+}
+
+thead th {
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f7fafc;
+}
+
+tbody td {
+    padding: 9px 12px;
+}
+
+/* Situação do aluno com cor */
+.aprovado {
+    color: #276749;
+    font-weight: bold;
+}
+
+.recuperacao {
+    color: #c05621;
+    font-weight: bold;
+}
+
+.reprovado {
+    color: #c53030;
+    font-weight: bold;
+}
+
+.estatisticas {
+    background-color: #ebf4ff;
+    border: 1px solid #bee3f8;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-top: 24px;
+}
+
+.estatisticas p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #2d3748;
+}
+
+.estatisticas span {
+    font-weight: bold;
+    color: #1a365d;
+}
+
+/* Mensagem de desempenho */
+.mensagem-desempenho {
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.desempenho-otimo {
+    background-color: #c6f6d5;
+    color: #22543d;
+    border: 1px solid #9ae6b4;
+}
+
+.desempenho-bom {
+    background-color: #fefcbf;
+    color: #744210;
+    border: 1px solid #f6e05e;
+}
+
+.desempenho-ruim {
+    background-color: #fed7d7;
+    color: #742a2a;
+    border: 1px solid #fc8181;
+}
+
+/* Link de voltar */
+.link-voltar {
+    display: inline-block;
+    margin-top: 24px;
+    color: #2b6cb0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}
