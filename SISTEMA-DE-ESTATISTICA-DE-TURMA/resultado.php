@@ -1,4 +1,4 @@
-<?php
+    <?php
     // Calcula a média aritmética das 3 notas
     function calcularMedia($nota1, $nota2, $trabalho) {
     return ($nota1 + $nota2 + $trabalho) / 3;

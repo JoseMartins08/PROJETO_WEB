@@ -1,4 +1,6 @@
 <?php
+    // Verifica se o formulário já foi enviado
+
     $quantidade = 0;
     $nomeTurma = "";
 
