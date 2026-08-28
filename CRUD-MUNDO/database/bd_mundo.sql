@@ -46,3 +46,24 @@ create table cidades (
     foreign key (pais_id) references paises(id_pais) on delete cascade,
     foreign key (governante_id) references governantes(id_governante) on delete set null
 );
+
+create table usuarios (
+	id_usuario int auto_increment primary key,
+    username varchar(30) not null,
+    senha varchar(128) not null,
+    nome varchar(80) not null,
+    status char(1) not null default 'A',
+    tipo char(1) not null default 'U',
+    qtde_acesso int not null default 0,
+    primeiro_acesso char(1) not null default 'S'
+);
+
+create table logs (
+	id_log int auto_increment primary key,
+    data_acesso date not null default current_timestamp,
+    descricao varchar(200),
+    username varchar(30) not null,
+    foreign key (username) references usuarios(username)
+);
+
+show create table usuarios;
