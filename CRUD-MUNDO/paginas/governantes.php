@@ -1,21 +1,27 @@
 <?php
 require_once '../config/database.php';
+require_once '../config/auth.php';
+verificarLogin();
 
 $mensagem = '';
 $tipo_mensagem = '';
 $edicao = null;
+$admin = ($_SESSION['tipo'] === 'A');
 
 if (isset($_GET['excluir'])) {
+    verificarAdmin();
     $id = intval($_GET['excluir']);
     $stmt = $conn->prepare("DELETE FROM governantes WHERE id_governante = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
+    registrarLog($conn, $_SESSION['username'], "Excluiu o governante ID $id.");
     $mensagem = "Governante excluído com sucesso.";
     $tipo_mensagem = "sucesso";
 }
 
 if (isset($_GET['editar'])) {
+    verificarAdmin();
     $id = intval($_GET['editar']);
     $stmt = $conn->prepare("SELECT * FROM governantes WHERE id_governante = ?");
     $stmt->bind_param("i", $id);
@@ -25,6 +31,7 @@ if (isset($_GET['editar'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    verificarAdmin();
     $nome = trim($_POST['nome']);
     $partido_politico = trim($_POST['partido_politico']);
     $data_nascimento = $_POST['data_nascimento'] !== '' ? $_POST['data_nascimento'] : null;
@@ -41,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sssissi", $nome, $partido_politico, $data_nascimento, $idade, $data_inicio_mandato, $data_fim_mandato, $id_governante);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Atualizou o governante '$nome'.");
         $mensagem = "Governante atualizado com sucesso.";
         $tipo_mensagem = "sucesso";
     } else {
@@ -48,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sssiss", $nome, $partido_politico, $data_nascimento, $idade, $data_inicio_mandato, $data_fim_mandato);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Cadastrou o governante '$nome'.");
         $mensagem = "Governante cadastrado com sucesso.";
         $tipo_mensagem = "sucesso";
     }
@@ -65,6 +74,7 @@ include '../includes/header.php';
     <div class="mensagem <?= $tipo_mensagem ?>"><?= htmlspecialchars($mensagem) ?></div>
 <?php endif; ?>
 
+<?php if ($admin): ?>
 <div class="form-container">
     <form method="POST" action="governantes.php">
         <input type="hidden" name="id_governante" value="<?= $edicao['id_governante'] ?? '' ?>">
@@ -100,6 +110,7 @@ include '../includes/header.php';
         </div>
     </form>
 </div>
+<?php endif; ?>
 
 <div class="busca">
     <input type="text" id="busca" placeholder="Buscar governante pelo nome...">
@@ -107,7 +118,10 @@ include '../includes/header.php';
 
 <table>
     <thead>
-        <tr><th>Nome</th><th>Partido</th><th>Início mandato</th><th>Fim mandato</th><th>Ações</th></tr>
+        <tr>
+            <th>Nome</th><th>Partido</th><th>Início mandato</th><th>Fim mandato</th>
+            <?php if ($admin): ?><th>Ações</th><?php endif; ?>
+        </tr>
     </thead>
     <tbody>
         <?php while ($row = $resultado->fetch_assoc()): ?>
@@ -116,10 +130,12 @@ include '../includes/header.php';
             <td data-label="Partido"><?= htmlspecialchars($row['partido_politico'] ?? '-') ?></td>
             <td data-label="Início mandato"><?= $row['data_inicio_mandato'] ?? '-' ?></td>
             <td data-label="Fim mandato"><?= $row['data_fim_mandato'] ?? '-' ?></td>
+            <?php if ($admin): ?>
             <td data-label="Ações">
                 <a href="governantes.php?editar=<?= $row['id_governante'] ?>" class="btn-link btn-editar">Editar</a>
                 <a href="governantes.php?excluir=<?= $row['id_governante'] ?>" class="btn-link btn-excluir">Excluir</a>
             </td>
+            <?php endif; ?>
         </tr>
         <?php endwhile; ?>
     </tbody>

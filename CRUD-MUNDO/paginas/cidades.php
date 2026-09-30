@@ -1,21 +1,27 @@
 <?php
 require_once '../config/database.php';
+require_once '../config/auth.php';
+verificarLogin();
 
 $mensagem = '';
 $tipo_mensagem = '';
 $edicao = null;
+$admin = ($_SESSION['tipo'] === 'A');
 
 if (isset($_GET['excluir'])) {
+    verificarAdmin();
     $id = intval($_GET['excluir']);
     $stmt = $conn->prepare("DELETE FROM cidades WHERE id_cidade = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
+    registrarLog($conn, $_SESSION['username'], "Excluiu a cidade ID $id.");
     $mensagem = "Cidade excluída com sucesso.";
     $tipo_mensagem = "sucesso";
 }
 
 if (isset($_GET['editar'])) {
+    verificarAdmin();
     $id = intval($_GET['editar']);
     $stmt = $conn->prepare("SELECT * FROM cidades WHERE id_cidade = ?");
     $stmt->bind_param("i", $id);
@@ -25,6 +31,7 @@ if (isset($_GET['editar'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    verificarAdmin();
     $nome = trim($_POST['nome']);
     $pais_id = $_POST['pais_id'] !== '' ? intval($_POST['pais_id']) : null;
     $populacao = $_POST['populacao'] !== '' ? intval($_POST['populacao']) : null;
@@ -42,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("siddssii", $nome, $pais_id, $populacao, $area, $clima, $data_fundacao, $governante_id, $id_cidade);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Atualizou a cidade '$nome'.");
         $mensagem = "Cidade atualizada com sucesso.";
         $tipo_mensagem = "sucesso";
     } else {
@@ -49,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("siddssi", $nome, $pais_id, $populacao, $area, $clima, $data_fundacao, $governante_id);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Cadastrou a cidade '$nome'.");
         $mensagem = "Cidade cadastrada com sucesso.";
         $tipo_mensagem = "sucesso";
     }
@@ -72,6 +81,7 @@ include '../includes/header.php';
     <div class="mensagem <?= $tipo_mensagem ?>"><?= htmlspecialchars($mensagem) ?></div>
 <?php endif; ?>
 
+<?php if ($admin): ?>
 <div class="form-container">
     <form method="POST" action="cidades.php">
         <input type="hidden" name="id_cidade" value="<?= $edicao['id_cidade'] ?? '' ?>">
@@ -125,6 +135,7 @@ include '../includes/header.php';
         </div>
     </form>
 </div>
+<?php endif; ?>
 
 <div class="busca">
     <input type="text" id="busca" placeholder="Buscar cidade pelo nome...">
@@ -132,7 +143,10 @@ include '../includes/header.php';
 
 <table>
     <thead>
-        <tr><th>Nome</th><th>País</th><th>População</th><th>Clima</th><th>Fundação</th><th>Governante</th><th>Ações</th></tr>
+        <tr>
+            <th>Nome</th><th>País</th><th>População</th><th>Clima</th><th>Fundação</th><th>Governante</th>
+            <?php if ($admin): ?><th>Ações</th><?php endif; ?>
+        </tr>
     </thead>
     <tbody>
         <?php while ($row = $resultado->fetch_assoc()): ?>
@@ -143,10 +157,12 @@ include '../includes/header.php';
             <td data-label="Clima"><?= htmlspecialchars($row['clima'] ?? '-') ?></td>
             <td data-label="Fundação"><?= $row['data_fundacao'] ?? '-' ?></td>
             <td data-label="Governante"><?= htmlspecialchars($row['governante_nome'] ?? '-') ?></td>
+            <?php if ($admin): ?>
             <td data-label="Ações">
                 <a href="cidades.php?editar=<?= $row['id_cidade'] ?>" class="btn-link btn-editar">Editar</a>
                 <a href="cidades.php?excluir=<?= $row['id_cidade'] ?>" class="btn-link btn-excluir">Excluir</a>
             </td>
+            <?php endif; ?>
         </tr>
         <?php endwhile; ?>
     </tbody>

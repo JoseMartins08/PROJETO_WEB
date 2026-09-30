@@ -1,11 +1,15 @@
 <?php
 require_once '../config/database.php';
+require_once '../config/auth.php';
+verificarLogin();
 
 $mensagem = '';
 $tipo_mensagem = '';
 $edicao = null;
+$admin = ($_SESSION['tipo'] === 'A');
 
 if (isset($_GET['excluir'])) {
+    verificarAdmin();
     $id = intval($_GET['excluir']);
 
     $check = $conn->prepare("SELECT COUNT(*) as total FROM paises WHERE continente_id = ?");
@@ -22,12 +26,14 @@ if (isset($_GET['excluir'])) {
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Excluiu o continente ID $id.");
         $mensagem = "Continente excluído com sucesso.";
         $tipo_mensagem = "sucesso";
     }
 }
 
 if (isset($_GET['editar'])) {
+    verificarAdmin();
     $id = intval($_GET['editar']);
     $stmt = $conn->prepare("SELECT * FROM continentes WHERE id_continente = ?");
     $stmt->bind_param("i", $id);
@@ -37,6 +43,7 @@ if (isset($_GET['editar'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    verificarAdmin();
     $nome = trim($_POST['nome']);
     $populacao = $_POST['populacao'] !== '' ? intval($_POST['populacao']) : null;
     $area = $_POST['area'] !== '' ? floatval($_POST['area']) : null;
@@ -51,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sddii", $nome, $populacao, $area, $total_paises, $id_continente);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Atualizou o continente '$nome'.");
         $mensagem = "Continente atualizado com sucesso.";
         $tipo_mensagem = "sucesso";
     } else {
@@ -58,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sddi", $nome, $populacao, $area, $total_paises);
         $stmt->execute();
         $stmt->close();
+        registrarLog($conn, $_SESSION['username'], "Cadastrou o continente '$nome'.");
         $mensagem = "Continente cadastrado com sucesso.";
         $tipo_mensagem = "sucesso";
     }
@@ -75,6 +84,7 @@ include '../includes/header.php';
     <div class="mensagem <?= $tipo_mensagem ?>"><?= htmlspecialchars($mensagem) ?></div>
 <?php endif; ?>
 
+<?php if ($admin): ?>
 <div class="form-container">
     <form method="POST" action="continentes.php">
         <input type="hidden" name="id_continente" value="<?= $edicao['id_continente'] ?? '' ?>">
@@ -102,6 +112,7 @@ include '../includes/header.php';
         </div>
     </form>
 </div>
+<?php endif; ?>
 
 <div class="busca">
     <input type="text" id="busca" placeholder="Buscar continente pelo nome...">
@@ -109,7 +120,10 @@ include '../includes/header.php';
 
 <table>
     <thead>
-        <tr><th>Nome</th><th>População</th><th>Área (km²)</th><th>Total de países</th><th>Ações</th></tr>
+        <tr>
+            <th>Nome</th><th>População</th><th>Área (km²)</th><th>Total de países</th>
+            <?php if ($admin): ?><th>Ações</th><?php endif; ?>
+        </tr>
     </thead>
     <tbody>
         <?php while ($row = $resultado->fetch_assoc()): ?>
@@ -118,10 +132,12 @@ include '../includes/header.php';
             <td data-label="População"><?= $row['populacao'] ?? '-' ?></td>
             <td data-label="Área (km²)"><?= $row['area'] ?? '-' ?></td>
             <td data-label="Total de países"><?= $row['total_paises'] ?></td>
+            <?php if ($admin): ?>
             <td data-label="Ações">
                 <a href="continentes.php?editar=<?= $row['id_continente'] ?>" class="btn-link btn-editar">Editar</a>
                 <a href="continentes.php?excluir=<?= $row['id_continente'] ?>" class="btn-link btn-excluir">Excluir</a>
             </td>
+            <?php endif; ?>
         </tr>
         <?php endwhile; ?>
     </tbody>
